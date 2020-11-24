@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const THEME_KEY = 'theme';
+
 const themes = {
   light: 'light',
   dark: 'dark',
@@ -17,7 +19,8 @@ const ThemeContext = React.createContext({
  * @return {JSX.Element}
  */
 function ThemeProvider({children}) {
-  const [theme, setTheme] = React.useState(themes.light);
+  const defaultTheme = localStorage.getItem(THEME_KEY) || themes.light;
+  const [theme, setTheme] = React.useState(defaultTheme);
   const value = {theme, setTheme};
 
   return (
@@ -44,4 +47,12 @@ function useTheme() {
   return context;
 }
 
-export {themes, ThemeProvider, useTheme};
+/**
+ * Persist the specifiec theme in Local Storage
+ * @param {string} theme Name of the theme
+ */
+function persistTheme(theme) {
+  localStorage.setItem(THEME_KEY, theme);
+}
+
+export {themes, ThemeProvider, useTheme, persistTheme};
