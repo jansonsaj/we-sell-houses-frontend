@@ -3,6 +3,7 @@ import 'antd/dist/antd.css';
 import './App.css';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import {ThemeProvider} from './ThemeContext';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
 
@@ -12,14 +13,16 @@ import Home from './components/Home';
  */
 function App() {
   return (
-    <Router>
-      <main>
-        <Navbar />
-        <Switch>
-          <Route path="/" exact component={Home}/>
-        </Switch>
-      </main>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <main>
+          <Navbar />
+          <Switch>
+            <Route path="/" exact component={Home}/>
+          </Switch>
+        </main>
+      </Router>
+    </ThemeProvider>
   );
 }
 
