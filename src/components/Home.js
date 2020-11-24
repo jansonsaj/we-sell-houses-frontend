@@ -1,12 +1,15 @@
 import React from 'react';
 
+import {useTheme} from '../ThemeContext';
+
 /**
  * Navigation bar
  * @return {JSX.Element}
  */
 function Home() {
+  const {theme} = useTheme();
   return (
-    <h1>Home</h1>
+    <h1>{theme}</h1>
   );
 }
 
