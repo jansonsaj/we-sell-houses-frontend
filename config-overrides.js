@@ -16,6 +16,7 @@ const lightTheme = {
   ...getLessVars('./node_modules/antd/lib/style/themes/default.less'),
   ...getLessVars('./src/styles/themes/LightTheme.less')};
 const darkTheme = {
+  ...getLessVars('./node_modules/antd/lib/style/themes/default.less'),
   ...getLessVars('./node_modules/antd/lib/style/themes/dark.less'),
   ...getLessVars('./src/styles/themes/DarkTheme.less')};
 

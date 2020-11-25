@@ -8,6 +8,7 @@ module.exports = {
     'plugin:react/recommended',
     'google',
   ],
+  'parser': 'babel-eslint',
   'parserOptions': {
     'ecmaFeatures': {
       'jsx': true,
@@ -19,6 +20,7 @@ module.exports = {
     'react',
   ],
   'rules': {
+    'no-invalid-this': 0,
   },
   'settings': {
     'react': {
