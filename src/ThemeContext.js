@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import darkVars from './styles/themes/dark.json';
+import lightVars from './styles/themes/light.json';
+
 const THEME_KEY = 'theme';
 
 const themes = {
@@ -20,6 +23,7 @@ const ThemeContext = React.createContext({
  */
 function ThemeProvider({children}) {
   const defaultTheme = localStorage.getItem(THEME_KEY) || themes.light;
+  updateStyling(defaultTheme);
   const [theme, setTheme] = React.useState(defaultTheme);
   const value = {theme, setTheme};
 
@@ -55,4 +59,13 @@ function persistTheme(theme) {
   localStorage.setItem(THEME_KEY, theme);
 }
 
-export {themes, ThemeProvider, useTheme, persistTheme};
+/**
+ * Updates the whole page's style variables
+ * @param {string} theme Name of the theme
+ */
+function updateStyling(theme) {
+  const vars = theme === themes.light ? lightVars : darkVars;
+  window.less.modifyVars(vars).catch(console.error);
+}
+
+export {themes, ThemeProvider, useTheme, persistTheme, updateStyling};

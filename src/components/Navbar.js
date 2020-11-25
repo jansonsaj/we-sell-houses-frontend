@@ -3,7 +3,7 @@ import React from 'react';
 import {Menu} from 'antd';
 import {HomeOutlined, SettingOutlined} from '@ant-design/icons';
 import {Link, useLocation} from 'react-router-dom';
-import {themes, useTheme, persistTheme} from '../ThemeContext';
+import {themes, useTheme, persistTheme, updateStyling} from '../ThemeContext';
 
 const {SubMenu, Item, ItemGroup} = Menu;
 
@@ -22,6 +22,7 @@ function Navbar() {
   function changeTheme(theme) {
     setTheme(theme);
     persistTheme(theme);
+    updateStyling(theme);
   }
 
   return (
