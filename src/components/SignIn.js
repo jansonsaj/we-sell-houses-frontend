@@ -5,15 +5,24 @@ import '../styles/Content.less';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Layout, Card, Form, Input, Button, Row, Col, Alert} from 'antd';
 import {Link, withRouter} from 'react-router-dom';
+import {showQueryStringMessage} from './Notification';
 
 const rules = {
   email: [{
     required: true,
+    message: 'Please input your Email!',
+  },
+  {
     type: 'email',
+    message: 'That is not a valid Email!',
   }],
   password: [{
     required: true,
+    message: 'Please input your Password!',
+  },
+  {
     min: 6,
+    message: 'The Password needs to be longer than 6 characters!',
   }],
 };
 
@@ -21,10 +30,18 @@ const rules = {
  * Sign in component
  */
 class SignIn extends React.Component {
-  state = {
-    loading: false,
-    alert: null,
-  };
+  /**
+   * Construct sign in component
+   * @param {object} props Component props
+   */
+  constructor(props) {
+    super(props);
+    showQueryStringMessage(props.location);
+    this.state = {
+      loading: false,
+      alert: null,
+    };
+  }
 
   /**
    * Posts the form entries to the sign in endpoint
@@ -92,16 +109,17 @@ class SignIn extends React.Component {
     return (
       <Layout.Content className="content">
         <Row gutter={[16, 16]} className="width-medium">
+
           <Col xs={24} sm={24} lg={16} xl={16}>
             <Card title="Sign In">
-              { this.state.alert &&
+              <Form onFinish={this.onSignInClick}>
+                { this.state.alert &&
                 <Form.Item>
                   <Alert
                     message={this.state.alert.message}
                     type={this.state.alert.type} />
                 </Form.Item>
-              }
-              <Form onFinish={this.onSignInClick}>
+                }
                 <Form.Item
                   name="email"
                   rules={rules.email}>
@@ -159,6 +177,7 @@ SignIn.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  location: PropTypes.object,
 };
 
 export default withRouter(SignIn);

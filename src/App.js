@@ -6,6 +6,7 @@ import {ThemeProvider} from './ThemeContext';
 import Header from './components/Header';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
+import Register from './components/Register';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 
@@ -22,6 +23,7 @@ function App() {
           <Switch>
             <Route path="/" exact component={Home} />
             <Route path="/signin" component={SignIn} />
+            <Route path="/register" component={Register} />
             <Route component={NotFound} />
           </Switch>
           <Footer />
