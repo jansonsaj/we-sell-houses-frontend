@@ -1,11 +1,12 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-import './App.css';
 
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {ThemeProvider} from './ThemeContext';
-import Navbar from './components/Navbar';
+import Header from './components/Header';
 import Home from './components/Home';
+import NotFound from './components/NotFound';
+import Footer from './components/Footer';
 
 /**
  * React entrypoint
@@ -16,10 +17,12 @@ function App() {
     <ThemeProvider>
       <Router>
         <main>
-          <Navbar />
+          <Header />
           <Switch>
-            <Route path="/" exact component={Home}/>
+            <Route path="/" exact component={Home} />
+            <Route component={NotFound} />
           </Switch>
+          <Footer />
         </main>
       </Router>
     </ThemeProvider>
