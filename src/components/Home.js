@@ -3,7 +3,7 @@ import React from 'react';
 import {useTheme} from '../ThemeContext';
 
 /**
- * Navigation bar
+ * Home page
  * @return {JSX.Element}
  */
 function Home() {
