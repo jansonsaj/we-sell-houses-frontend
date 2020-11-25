@@ -34,7 +34,7 @@ function Navbar() {
    */
   function signOut() {
     localStorage.removeItem('user');
-    history.push('/signin');
+    history.push('/signin?message=You have signed out');
   }
 
   return (
