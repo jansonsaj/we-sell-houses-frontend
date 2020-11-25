@@ -1,7 +1,9 @@
 import React from 'react';
 
 import {Menu} from 'antd';
-import {HomeOutlined, SettingOutlined} from '@ant-design/icons';
+import {
+  HomeOutlined, SettingOutlined, MenuOutlined, LoginOutlined,
+} from '@ant-design/icons';
 import {Link, useLocation} from 'react-router-dom';
 import {themes, useTheme, persistTheme, updateStyling} from '../ThemeContext';
 
@@ -29,9 +31,14 @@ function Navbar() {
     <Menu
       mode="horizontal"
       theme={theme}
-      selectedKeys={[theme, location.pathname]}>
+      selectedKeys={[location.pathname]}
+      className="navbar"
+      overflowedIndicator={<MenuOutlined />}>
       <Item key="/" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
+      </Item>
+      <Item key="/signin" icon={<LoginOutlined />} className="navbar-right">
+        <Link to="/signin">Sign In</Link>
       </Item>
       <SubMenu icon={<SettingOutlined />} title="Settings">
         <ItemGroup title="Theme">

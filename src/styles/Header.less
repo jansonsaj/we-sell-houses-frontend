@@ -1,0 +1,25 @@
+.header {
+	display: flex;
+	flex-direction: row;
+
+	&:not(.dark) {
+		border-bottom: 1px solid #f0f0f0;
+	}
+
+	.logo {
+		margin-right: 50px;
+		white-space: nowrap;
+	}
+
+	.navbar {
+		display: flex;
+		flex-direction: row;
+		flex-grow: 2;
+		height: 64px;
+		min-width: 0;
+	}
+
+	.navbar-right {
+		margin-left: auto !important;
+	}
+}
