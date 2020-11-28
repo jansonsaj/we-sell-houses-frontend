@@ -54,7 +54,7 @@ class Register extends React.Component {
   };
 
   /**
-   * Posts the form entries to the sign in endpoint
+   * Posts the form entries to the sign up endpoint
    * @param {object} values Form entries
    */
   onRegisterClick = async (values) => {
