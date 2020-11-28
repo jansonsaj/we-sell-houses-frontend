@@ -75,7 +75,9 @@ class SignIn extends React.Component {
    * @param {object} user Signed in user
    */
   signInUser = (user) => {
-    localStorage.setItem('user', user);
+    localStorage.setItem('userId', user.id);
+    localStorage.setItem('accessToken', user.accessToken);
+    this.props.setSignedIn(true);
     const {history} = this.props;
     history.push('/');
   }
@@ -178,6 +180,7 @@ SignIn.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   location: PropTypes.object,
+  setSignedIn: PropTypes.func.isRequired,
 };
 
 export default withRouter(SignIn);

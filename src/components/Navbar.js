@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import {Menu} from 'antd';
 import {
@@ -11,13 +12,14 @@ const {SubMenu, Item, ItemGroup} = Menu;
 
 /**
  * Navigation bar
+ * @param {object} props Component's properties
  * @return {JSX.Element}
  */
-function Navbar() {
+function Navbar(props) {
   const {theme, setTheme} = useTheme();
   const location = useLocation();
   const history = useHistory();
-  const user = localStorage.getItem('user');
+  const signedIn = !!localStorage.getItem('userId');
 
   /**
    * Change the current theme and remember it
@@ -33,7 +35,9 @@ function Navbar() {
    * Sign out the user and redirect to sign in page
    */
   function signOut() {
-    localStorage.removeItem('user');
+    localStorage.removeItem('userId');
+    localStorage.removeItem('accessToken');
+    props.setSignedIn(false);
     history.push('/signin?message=You have signed out');
   }
 
@@ -47,7 +51,7 @@ function Navbar() {
       <Item key="/" icon={<HomeOutlined />}>
         <Link to="/">Home</Link>
       </Item>
-      {user ?
+      {signedIn ?
       <Item
         key="/signout"
         icon={<LogoutOutlined />}
@@ -78,5 +82,10 @@ function Navbar() {
     </Menu>
   );
 }
+
+Navbar.propTypes = {
+  setSignedIn: PropTypes.func.isRequired,
+  signedIn: PropTypes.bool.isRequired,
+};
 
 export default Navbar;
