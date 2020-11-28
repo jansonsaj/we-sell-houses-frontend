@@ -3,7 +3,12 @@ import PropTypes from 'prop-types';
 
 import {Menu} from 'antd';
 import {
-  HomeOutlined, SettingOutlined, MenuOutlined, LoginOutlined, LogoutOutlined,
+  HomeOutlined,
+  SettingOutlined,
+  MenuOutlined,
+  LoginOutlined,
+  LogoutOutlined,
+  PlusCircleOutlined,
 } from '@ant-design/icons';
 import {Link, useLocation, useHistory} from 'react-router-dom';
 import {themes, useTheme, persistTheme, updateStyling} from '../ThemeContext';
@@ -48,20 +53,25 @@ function Navbar(props) {
       selectedKeys={[location.pathname]}
       className="navbar"
       overflowedIndicator={<MenuOutlined className="collapsed-icon" />}>
-      <Item key="/" icon={<HomeOutlined />}>
-        <Link to="/">Home</Link>
+      <Item key="/properties" icon={<HomeOutlined />}>
+        <Link to="/properties">Properties</Link>
       </Item>
+      {signedIn &&
+        <Item key="/new-property" icon={<PlusCircleOutlined />}>
+          <Link to="/new-property">New Property</Link>
+        </Item>
+      }
       {signedIn ?
-      <Item
-        key="/signout"
-        icon={<LogoutOutlined />}
-        className="navbar-right"
-        onClick={signOut}>
-        Sign Out
-      </Item> :
-      <Item key="/signin" icon={<LoginOutlined />} className="navbar-right">
-        <Link to="/signin">Sign In</Link>
-      </Item>
+        <Item
+          key="/signout"
+          icon={<LogoutOutlined />}
+          className="navbar-right"
+          onClick={signOut}>
+          Sign Out
+        </Item> :
+        <Item key="/signin" icon={<LoginOutlined />} className="navbar-right">
+          <Link to="/signin">Sign In</Link>
+        </Item>
       }
       <SubMenu icon={<SettingOutlined />} title="Settings">
         <ItemGroup title="Theme">

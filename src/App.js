@@ -13,6 +13,8 @@ import Header from './components/Header';
 import Home from './components/Home';
 import SignIn from './components/SignIn';
 import Register from './components/Register';
+import Properties from './components/Properties';
+import NewProperty from './components/NewProperty';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 
@@ -46,6 +48,8 @@ function App() {
               path="/signin"
               render={() => <SignIn setSignedIn={setSignedIn} />} />
             <Route path="/register" component={Register} />
+            <Route path="/properties" component={Properties} />
+            <PrivateRoute path="/new-property" component={NewProperty} />
             <Route component={NotFound} />
           </Switch>
           <Footer />
