@@ -3,8 +3,13 @@ import PropTypes from 'prop-types';
 
 import '../styles/Content.less';
 import {withRouter} from 'react-router-dom';
-import {Layout, List, Pagination} from 'antd';
+import {Layout, List, Pagination, Alert} from 'antd';
 import PropertyTile from './PropertyTile';
+import PropertyFilter from './PropertyFilter';
+
+const pageSizeOptions = [
+  3, 10, 20, 50, 100,
+];
 
 /**
  * Properties component, that lists properties according to the selected filters
@@ -20,8 +25,8 @@ class Properties extends React.Component {
     const queryParameters = new URLSearchParams(props.location.search);
     this.state = {
       loading: true,
+      alert: null,
       properties: [],
-      pageCount: 0,
       propertyCount: 0,
       searchParams: {
         page: queryParameters.get('page') || 1,
@@ -40,6 +45,19 @@ class Properties extends React.Component {
         postcode: queryParameters.get('postcode'),
       },
     };
+    this.getProperties();
+  }
+
+  /**
+   * Update search params and request new properties according
+   * to the property filter component
+   * @param {object} updatedSearchParams Search params from filter
+   */
+  setSearchParams = (updatedSearchParams) => {
+    const searchParams = {...this.state.searchParams};
+    Object.assign(searchParams, updatedSearchParams);
+    searchParams.page = 1;
+    this.setState({searchParams});
     this.getProperties();
   }
 
@@ -74,7 +92,7 @@ class Properties extends React.Component {
    * @return {JSX.Element}
    */
   getProperties = async () => {
-    this.setState({loading: true});
+    this.setState({loading: true, alert: null});
     this.updateUrl();
 
     const url = process.env.REACT_APP_API_URL +
@@ -93,18 +111,23 @@ class Properties extends React.Component {
     this.setState({loading: false});
     if (response.status === 200) {
       const json = await response.json();
-      const searchParams = this.state.searchParams;
+      const searchParams = {...this.state.searchParams};
       searchParams.page = json.page;
       searchParams.resultsPerPage = json.resultsPerPage;
       this.setState({
         properties: json.properties,
-        pageCount: json.pageCount,
         propertyCount: json.propertyCount,
         searchParams,
       });
-      console.log(this.state.searchParams);
     } else {
-      console.log(await response.text());
+      this.setState({
+        properties: [],
+        propertyCount: 0,
+        alert: {
+          message: 'Invalid filters. Please check your filters and try again.',
+          type: 'error',
+        },
+      });
     }
   }
 
@@ -133,9 +156,9 @@ class Properties extends React.Component {
         showTotal={(total) => `Found ${total} properties`}
         current={this.state.searchParams.page}
         pageSize={this.state.searchParams.resultsPerPage}
+        pageSizeOptions={pageSizeOptions}
         showSizeChanger
         onChange={this.onPagination}
-        onShowSizeChange={this.onPagination}
       />
     );
   }
@@ -146,7 +169,18 @@ class Properties extends React.Component {
    */
   render() {
     return (
-      <Layout.Content className="content">
+      <Layout.Content className="content content-vertical">
+        <PropertyFilter
+          searchParams={this.state.searchParams}
+          setSearchParams={this.setSearchParams}
+          loading={this.state.loading}
+          signedIn={this.props.signedIn} />
+        {this.state.alert &&
+          <Alert
+            className="property-alert"
+            message={this.state.alert.message}
+            type={this.state.alert.type} />
+        }
         <List
           className="property-list"
           itemLayout="vertical"
@@ -167,6 +201,7 @@ Properties.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   location: PropTypes.object,
+  signedIn: PropTypes.bool.isRequired,
 };
 
 export default withRouter(Properties);

@@ -48,7 +48,9 @@ function App() {
               path="/signin"
               render={() => <SignIn setSignedIn={setSignedIn} />} />
             <Route path="/register" component={Register} />
-            <Route path="/properties" component={Properties} />
+            <Route
+              path="/properties"
+              render={() => <Properties signedIn={signedIn} />} />
             <PrivateRoute path="/new-property" component={NewProperty} />
             <Route component={NotFound} />
           </Switch>

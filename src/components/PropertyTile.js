@@ -69,7 +69,6 @@ function priceFormatter(price) {
  */
 function PropertyTile(props) {
   const {property} = props;
-  console.log(property);
   return (
     <List.Item
       key={property._id}
