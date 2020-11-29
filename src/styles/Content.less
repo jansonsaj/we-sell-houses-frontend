@@ -1,3 +1,5 @@
+@import "~antd/lib/style/color/colors.less";
+
 .button-block {
 	width: 100%;
 }
@@ -14,6 +16,54 @@
 
 .w-100 {
 	width: 100%;
+}
+
+.text-accent {
+	color: @blue-7;
+}
+
+.property-list {
+	.w-100();
+	max-width: 800px;
+
+	.property-list-item {
+		& > .ant-list-item-main {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+
+	.image > img {
+		object-fit: cover;
+	}
+
+	.price {
+		padding: 10px;
+		display: inherit;
+		margin: 0;
+		text-align: end;
+
+		&.priority-high {
+			background: @blue-7;
+			color: white;
+		}
+	}
+
+	.title {
+		&:hover {
+			text-decoration: underline;
+			color: @blue-6;
+		}
+	}
+
+	.type {
+		text-transform: capitalize;
+	}
+
+	.listed-time {
+		margin-top: auto;
+		margin-bottom: 10px;
+	}
 }
 
 .vertical-center {
