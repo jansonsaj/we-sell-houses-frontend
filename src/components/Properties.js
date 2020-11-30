@@ -87,8 +87,7 @@ class Properties extends React.Component {
   }
 
   /**
-   * Builds a list of property tiles according to the
-   * filter and sort criteria
+   * Get a list of properties according to the search params
    * @return {JSX.Element}
    */
   getProperties = async () => {
@@ -101,14 +100,14 @@ class Properties extends React.Component {
 
     const options = {
       method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: {},
     };
+    if (this.props.signedIn) {
+      options.headers['x-access-token'] = localStorage.getItem('accessToken');
+    }
 
     const response = await fetch(url, options);
 
-    this.setState({loading: false});
     if (response.status === 200) {
       const json = await response.json();
       const searchParams = {...this.state.searchParams};
@@ -129,6 +128,7 @@ class Properties extends React.Component {
         },
       });
     }
+    this.setState({loading: false});
   }
 
   /**

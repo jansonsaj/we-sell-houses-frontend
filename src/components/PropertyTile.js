@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import {List, Typography, Image} from 'antd';
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 
 const priority = {
@@ -88,11 +89,11 @@ function PropertyTile(props) {
         </>
       }
     >
-      <a href={`/properties/${property._id}`}>
+      <Link to={`/properties/${property._id}`}>
         <Typography.Title level={4} className="title">
           {property.title}
         </Typography.Title>
-      </a>
+      </Link>
 
       <Typography.Paragraph className="type">
         {typeFormatter(property.type)}
