@@ -21,7 +21,7 @@ import {
   message,
 } from 'antd';
 import {EditOutlined, MessageOutlined, DeleteOutlined} from '@ant-design/icons';
-import {withRouter} from 'react-router-dom';
+import {withRouter, Link} from 'react-router-dom';
 import Carousel from './Carousel';
 import moment from 'moment';
 
@@ -164,7 +164,9 @@ class Property extends React.Component {
     if (this.state.property.ownerId === localStorage.getItem('userId')) {
       return [
         <Tooltip key="edit" title="Edit property">
+          <Link to={`/properties/${this.state.property._id}/update`}>
           <EditOutlined />
+          </Link>
         </Tooltip>,
       ];
     } else {
@@ -185,7 +187,9 @@ class Property extends React.Component {
     if (this.state.property.ownerId === localStorage.getItem('userId')) {
       return [
         <Button key="edit" type="primary">
+          <Link to={`/properties/${this.state.property._id}/update`}>
           <EditOutlined /> Edit property
+          </Link>
         </Button>,
         <Popconfirm
           key="delete"
