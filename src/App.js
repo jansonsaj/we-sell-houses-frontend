@@ -16,6 +16,7 @@ import Register from './components/Register';
 import Properties from './components/Properties';
 import NewProperty from './components/NewProperty';
 import Property from './components/Property';
+import UpdateProperty from './components/UpdateProperty';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 
@@ -29,7 +30,7 @@ function App() {
   const PrivateRoute = ({component: Component, ...rest}) => (
     <Route {...rest} render={(props) => (
       signedIn ?
-        <Component {...props} /> :
+        <Component {...props} signedIn={signedIn} /> :
         <Redirect to='/signin' />
     )} />
   );
@@ -49,6 +50,9 @@ function App() {
               path="/signin"
               render={() => <SignIn setSignedIn={setSignedIn} />} />
             <Route path="/register" component={Register} />
+            <PrivateRoute
+              path="/properties/:id/update"
+              component={UpdateProperty} />
             <Route
               path="/properties/:id"
               render={() => <Property signedIn={signedIn} />} />
