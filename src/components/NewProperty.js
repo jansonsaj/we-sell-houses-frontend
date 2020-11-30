@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import '../styles/Content.less';
 import {
@@ -12,6 +13,7 @@ import {
   InputNumber,
   Divider,
 } from 'antd';
+import {withRouter} from 'react-router-dom';
 
 const {Option} = Select;
 
@@ -122,10 +124,14 @@ class NewProperty extends React.Component {
    */
   onSubmit = async (values) => {
     this.setState({loading: true});
+    const data = {...values};
+    if (!data.price) {
+      data.price = 0;
+    }
 
     const options = {
       method: 'POST',
-      body: JSON.stringify(values),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('accessToken'),
@@ -139,21 +145,19 @@ class NewProperty extends React.Component {
 
     this.setState({loading: false});
     if (response.status === 201) {
-      this.onPropertyCreated();
+      this.onPropertyCreated(await response.json());
     } else {
       this.displayAlertMessage(response);
     }
   };
 
   /**
-   * Property successfully created, display a success message
+   * When property has successfully been created, redirect
+   * to its detail page
+   * @param {object} property Newly created property
    */
-  onPropertyCreated = () => {
-    this.setState({
-      alert: {
-        type: 'success',
-        message: 'Property created',
-      }});
+  onPropertyCreated = (property) => {
+    this.props.history.push(`/properties/${property._id}`);
   }
 
   /**
@@ -296,4 +300,11 @@ class NewProperty extends React.Component {
   }
 }
 
-export default NewProperty;
+NewProperty.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
+
+
+export default withRouter(NewProperty);

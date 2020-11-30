@@ -64,6 +64,7 @@ function PropertyFilter(props) {
     });
     return formFields;
   }
+
   return (
     <Collapse expandIconPosition='right' className="property-filters">
       <Collapse.Panel

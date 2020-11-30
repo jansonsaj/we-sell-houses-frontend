@@ -56,7 +56,8 @@ function descriptionFormatter(description) {
  * @return {string} Formatted price
  */
 function priceFormatter(price) {
-  if (!price || price === 'NaN') {
+  const number = Number(price);
+  if (isNaN(number) || number === 0) {
     return 'Contact seller for price';
   }
   return `£ ${price ? price : 0}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
