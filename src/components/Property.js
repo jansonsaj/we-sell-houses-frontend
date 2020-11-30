@@ -59,13 +59,26 @@ function typeFormatter(type) {
 }
 
 /**
+ * Converts specific camel-cased statuses to human readable strings
+ * @param {string} status Camel-cased status
+ * @return {string} Human readable status
+ */
+function statusFormatter(status) {
+  if (status === 'underOffer') {
+    return 'Under offer';
+  }
+  return capitalize(status);
+}
+
+/**
  * Formats the price by prepending a £ sign
  * and adding a thousand separator comma
  * @param {number} price Selected price
  * @return {string} Formatted price
  */
 function priceFormatter(price) {
-  if (!price || price === 'NaN') {
+  const number = Number(price);
+  if (isNaN(number) || number === 0) {
     return 'Contact seller for price';
   }
   return `£ ${price ? price : 0}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
@@ -126,6 +139,9 @@ class Property extends React.Component {
     this.setState({deleteVisible: !this.state.deleteVisible});
   }
 
+  /**
+   * Navigate back to the previous page
+   */
   goToPreviousPage = () => {
     window.history.back();
   }
@@ -165,7 +181,7 @@ class Property extends React.Component {
       return [
         <Tooltip key="edit" title="Edit property">
           <Link to={`/properties/${this.state.property._id}/update`}>
-          <EditOutlined />
+            <EditOutlined />
           </Link>
         </Tooltip>,
       ];
@@ -188,7 +204,7 @@ class Property extends React.Component {
       return [
         <Button key="edit" type="primary">
           <Link to={`/properties/${this.state.property._id}/update`}>
-          <EditOutlined /> Edit property
+            <EditOutlined /> Edit property
           </Link>
         </Button>,
         <Popconfirm
@@ -301,7 +317,7 @@ class Property extends React.Component {
                       <Statistic
                         title="Status"
                         value={property.status}
-                        formatter={capitalize} />
+                        formatter={statusFormatter} />
                     </Col>
                     <Col {...colLayout}>
                       <Statistic
@@ -314,13 +330,15 @@ class Property extends React.Component {
                   <Typography.Title level={2}>
                     {property.title}
                   </Typography.Title>
-                  <Typography.Paragraph>
-                    {property.description}
-                  </Typography.Paragraph>
+                  <Divider />
                   <Typography.Text>Features:</Typography.Text>
                   <ul>
                     {features}
                   </ul>
+                  <Divider />
+                  <Typography.Paragraph className="description">
+                    {property.description}
+                  </Typography.Paragraph>
                   <Typography.Text type="secondary">
                     Listed {moment(property.createdAt).fromNow()}
                   </Typography.Text>
