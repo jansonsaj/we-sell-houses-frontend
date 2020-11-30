@@ -17,8 +17,10 @@ import {
   Tooltip,
   PageHeader,
   Button,
+  Popconfirm,
+  message,
 } from 'antd';
-import {EditOutlined, MessageOutlined} from '@ant-design/icons';
+import {EditOutlined, MessageOutlined, DeleteOutlined} from '@ant-design/icons';
 import {withRouter} from 'react-router-dom';
 import Carousel from './Carousel';
 import moment from 'moment';
@@ -84,6 +86,8 @@ class Property extends React.Component {
       loading: true,
       property: null,
       notFound: false,
+      deleteVisible: false,
+      deleteLoading: false,
     };
     this.getProperty();
   }
@@ -113,6 +117,42 @@ class Property extends React.Component {
       this.setState({notFound: true});
     }
     this.setState({loading: false});
+  }
+
+  /**
+   * Toggle show or hide delete popconfirm
+   */
+  toggleDeletePopconfirm = () => {
+    this.setState({deleteVisible: !this.state.deleteVisible});
+  }
+
+  goToPreviousPage = () => {
+    window.history.back();
+  }
+
+  /**
+   * Delete current property
+   */
+  deleteProperty = async () => {
+    this.setState({deleteLoading: true});
+    const propertyId = this.state.property._id;
+    const url = `${process.env.REACT_APP_API_URL}/properties/${propertyId}`;
+
+    const options = {
+      method: 'DELETE',
+      headers: {
+        'x-access-token': localStorage.getItem('accessToken'),
+      },
+    };
+
+    const response = await fetch(url, options);
+
+    if (response.status === 200) {
+      this.goToPreviousPage();
+    } else {
+      message.error('Unable to delete property. Try again later');
+    }
+    this.setState({deleteLoading: false});
   }
 
   /**
@@ -147,6 +187,26 @@ class Property extends React.Component {
         <Button key="edit" type="primary">
           <EditOutlined /> Edit property
         </Button>,
+        <Popconfirm
+          key="delete"
+          title={
+            `Are you sure you want to delete this property?
+            This action cannot be undone`
+          }
+          placement="bottom"
+          visible={this.state.deleteVisible}
+          onConfirm={this.deleteProperty}
+          okText="Delete"
+          okButtonProps={{
+            loading: this.state.deleteLoading,
+            danger: true,
+          }}
+          onCancel={this.toggleDeletePopconfirm}
+        >
+          <Button danger type="primary" onClick={this.toggleDeletePopconfirm}>
+            <DeleteOutlined />Delete property
+          </Button>
+        </Popconfirm>,
       ];
     } else {
       return [
@@ -195,7 +255,7 @@ class Property extends React.Component {
               className="property-card"
               cover={
                 <PageHeader
-                  onBack={() => window.history.back()}
+                  onBack={this.goToPreviousPage}
                   title={property.title}
                   extra={this.headerActions()}
                 >
