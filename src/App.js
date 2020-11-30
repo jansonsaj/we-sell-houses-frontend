@@ -15,6 +15,7 @@ import SignIn from './components/SignIn';
 import Register from './components/Register';
 import Properties from './components/Properties';
 import NewProperty from './components/NewProperty';
+import Property from './components/Property';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 
@@ -48,6 +49,9 @@ function App() {
               path="/signin"
               render={() => <SignIn setSignedIn={setSignedIn} />} />
             <Route path="/register" component={Register} />
+            <Route
+              path="/properties/:id"
+              render={() => <Property signedIn={signedIn} />} />
             <Route
               path="/properties"
               render={() => <Properties signedIn={signedIn} />} />
