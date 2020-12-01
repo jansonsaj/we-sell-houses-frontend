@@ -5,7 +5,6 @@ import '../styles/Content.less';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
 import {Layout, Card, Form, Input, Button, Row, Col, Alert} from 'antd';
 import {Link, withRouter} from 'react-router-dom';
-import {showQueryStringMessage} from './Notification';
 
 const rules = {
   email: [{
@@ -36,7 +35,6 @@ class SignIn extends React.Component {
    */
   constructor(props) {
     super(props);
-    showQueryStringMessage(props.location);
     this.state = {
       loading: false,
       alert: null,

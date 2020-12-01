@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import {Menu} from 'antd';
+import {Menu, message} from 'antd';
 import {
   HomeOutlined,
   SettingOutlined,
@@ -43,7 +43,8 @@ function Navbar(props) {
     localStorage.removeItem('userId');
     localStorage.removeItem('accessToken');
     props.setSignedIn(false);
-    history.push('/signin?message=You have signed out');
+    message.info('You have signed out');
+    history.push('/signin');
   }
 
   return (

@@ -5,7 +5,7 @@ import '../styles/Content.less';
 import {
   UserOutlined, LockOutlined, PlusCircleOutlined,
 } from '@ant-design/icons';
-import {Layout, Card, Form, Input, Button, Alert} from 'antd';
+import {Layout, Card, Form, Input, Button, Alert, message} from 'antd';
 import {Link, withRouter} from 'react-router-dom';
 
 const rules = {
@@ -79,8 +79,8 @@ class Register extends React.Component {
 
     this.setState({loading: false});
     if (response.status === 201) {
-      this.props.history
-          .push('/signin?message=Account created. You can log in now');
+      message.success('Account created. You can log in now');
+      this.props.history.push('/signin');
     } else {
       this.displayAlertMessage(response, values.email);
     }
