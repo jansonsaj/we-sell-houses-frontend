@@ -143,7 +143,7 @@ class Property extends React.Component {
    * Navigate back to the previous page
    */
   goToPreviousPage = () => {
-    window.history.back();
+    this.props.history.goBack();
   }
 
   /**
@@ -407,6 +407,7 @@ class Property extends React.Component {
 
 Property.propTypes = {
   match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   signedIn: PropTypes.bool.isRequired,
 };
 

@@ -31,7 +31,15 @@ function App() {
     <Route {...rest} render={(props) => (
       signedIn ?
         <Component {...props} signedIn={signedIn} /> :
-        <Redirect to='/signin' />
+        <Redirect to={{
+          pathname: '/signin',
+          state: {
+            redirectAfterSignIn: {
+              pathname: props.location.pathname,
+              search: props.location.search,
+            },
+          },
+        }} />
     )} />
   );
 
