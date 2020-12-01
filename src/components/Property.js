@@ -188,7 +188,13 @@ class Property extends React.Component {
     } else {
       return [
         <Tooltip key="message" title="Message property owner">
-          <MessageOutlined />
+          <Link to={{
+            pathname: '/new-message',
+            search: `?propertyId=${this.state.property._id}` +
+            `&receiverUserId=${this.state.property.ownerId}`,
+          }}>
+            <MessageOutlined />
+          </Link>
         </Tooltip>,
       ];
     }
@@ -231,7 +237,13 @@ class Property extends React.Component {
     } else {
       return [
         <Button key="message" type="primary">
-          <MessageOutlined /> Message property owner
+          <Link to={{
+            pathname: '/new-message',
+            search: `?propertyId=${this.state.property._id}` +
+            `&receiverUserId=${this.state.property.ownerId}`,
+          }}>
+            <MessageOutlined /> Message property owner
+          </Link>
         </Button>,
       ];
     }
@@ -408,6 +420,7 @@ class Property extends React.Component {
 Property.propTypes = {
   match: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
   signedIn: PropTypes.bool.isRequired,
 };
 

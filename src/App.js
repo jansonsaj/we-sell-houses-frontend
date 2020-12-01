@@ -17,6 +17,7 @@ import Properties from './components/Properties';
 import NewProperty from './components/NewProperty';
 import Property from './components/Property';
 import UpdateProperty from './components/UpdateProperty';
+import NewMessage from './components/NewMessage';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 
@@ -68,6 +69,7 @@ function App() {
               path="/properties"
               render={() => <Properties signedIn={signedIn} />} />
             <PrivateRoute path="/new-property" component={NewProperty} />
+            <Route path="/new-message" component={NewMessage} />
             <Route component={NotFound} />
           </Switch>
           <Footer />
