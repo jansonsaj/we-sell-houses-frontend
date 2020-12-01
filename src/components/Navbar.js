@@ -9,6 +9,7 @@ import {
   LoginOutlined,
   LogoutOutlined,
   PlusCircleOutlined,
+  MailOutlined,
 } from '@ant-design/icons';
 import {Link, useLocation, useHistory} from 'react-router-dom';
 import {themes, useTheme, persistTheme, updateStyling} from '../ThemeContext';
@@ -60,6 +61,11 @@ function Navbar(props) {
       {signedIn &&
         <Item key="/new-property" icon={<PlusCircleOutlined />}>
           <Link to="/new-property">New Property</Link>
+        </Item>
+      }
+      {signedIn &&
+        <Item key="/messages" icon={<MailOutlined />}>
+          <Link to="/messages">Messages</Link>
         </Item>
       }
       {signedIn ?
