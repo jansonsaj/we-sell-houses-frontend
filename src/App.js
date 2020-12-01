@@ -21,6 +21,7 @@ import NewMessage from './components/NewMessage';
 import NotFound from './components/NotFound';
 import Footer from './components/Footer';
 import Messages from './components/Messages';
+import Message from './components/Message';
 
 /**
  * React entrypoint
@@ -70,6 +71,7 @@ function App() {
               path="/properties"
               render={() => <Properties signedIn={signedIn} />} />
             <PrivateRoute path="/new-property" component={NewProperty} />
+            <PrivateRoute path="/messages/:id" component={Message} />
             <PrivateRoute path="/messages" component={Messages} />
             <Route path="/new-message" component={NewMessage} />
             <Route component={NotFound} />
