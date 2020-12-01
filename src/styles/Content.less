@@ -15,7 +15,8 @@
 	align-items: center;
 }
 
-.property-filters {
+.property-filters,
+.message-filters {
 	max-width: 800px;
 	width: 100%;
 
@@ -28,7 +29,8 @@
 	}
 }
 
-.property-alert {
+.property-alert,
+.message-alert {
 	max-width: 800px;
 	width: 100%;
 	margin-top: 16px;
@@ -101,6 +103,31 @@
 	.listed-time {
 		margin-top: auto;
 		margin-bottom: 10px;
+	}
+}
+
+.message-list {
+	.w-100();
+	max-width: 800px;
+
+	.message-list-item {
+		cursor: pointer;
+		padding-left: 20px;
+		padding-right: 20px;
+
+		&:hover {
+			border-left: 2px solid #1990ff;
+			padding-left: 18px;
+			background: rgb(245, 245, 245);
+
+			&.dark {
+				background: rgb(10, 10, 10);
+			}
+		}
+
+		&:not(.status-sent) h4 {
+			font-weight: 300;
+		}
 	}
 }
 
