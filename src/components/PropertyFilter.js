@@ -24,8 +24,8 @@ const colLayout = {
 };
 
 /**
- * Property tile component for displaying the most
- * important information about a property in a list
+ * Property filter component for displaying filters
+ * that can be applied for searching properties
  * @param {object} props Component properties
  * @return {JSX.Element}
  */
