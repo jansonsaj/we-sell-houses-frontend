@@ -231,7 +231,7 @@ class UpdateProperty extends React.Component {
    * Navigate back to the previous page
    */
   goToPreviousPage = () => {
-    window.history.back();
+    this.props.history.goBack();
   }
 
   /**
@@ -384,6 +384,7 @@ class UpdateProperty extends React.Component {
 
 UpdateProperty.propTypes = {
   match: PropTypes.object.isRequired,
+  history: PropTypes.object.isRequired,
   signedIn: PropTypes.bool.isRequired,
 };
 

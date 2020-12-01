@@ -71,15 +71,24 @@ class SignIn extends React.Component {
   };
 
   /**
-   * Store the signed in user and redirect them to referrer
+   * Store the signed in user. If the user tried accessing a
+   * protected route and was prompted to sign in, redirect them
+   * back to the protected route, otherwise redirect them to
+   * home page
    * @param {object} user Signed in user
    */
   signInUser = (user) => {
     localStorage.setItem('userId', user.id);
     localStorage.setItem('accessToken', user.accessToken);
     this.props.setSignedIn(true);
-    const {history} = this.props;
-    history.push('/');
+
+    const {history, location} = this.props;
+
+    if (location.state && location.state.redirectAfterSignIn) {
+      history.push(location.state.redirectAfterSignIn);
+    } else {
+      history.push('/');
+    }
   }
 
   /**
@@ -178,6 +187,7 @@ class SignIn extends React.Component {
 SignIn.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func,
+    goBack: PropTypes.func,
   }).isRequired,
   location: PropTypes.object,
   setSignedIn: PropTypes.func.isRequired,
