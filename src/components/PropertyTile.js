@@ -64,6 +64,29 @@ function priceFormatter(price) {
 }
 
 /**
+ * Get thumbnail for a property
+ * @param {object[]} property Property
+ * @return {JSX.Element} Thumbnail component
+ */
+function getThumbnail(property) {
+  if (property.files && property.files.length !== 0) {
+    const thumbnail = property.files
+        .find((file) => file.type.startsWith('image'));
+
+    if (thumbnail) {
+      return (
+        <Image
+          className="image"
+          {...priority[property.priority].image}
+          src={`${process.env.REACT_APP_API_URL}/${thumbnail.fileLocation}`}
+        />
+      );
+    }
+  }
+  return (null);
+}
+
+/**
  * Property tile component for displaying the most
  * important information about a property in a list
  * @param {object} props Component properties
@@ -77,11 +100,7 @@ function PropertyTile(props) {
       className={`property-list-item priority-${property.priority}`}
       extra={
         <>
-          <Image
-            className="image"
-            {...priority[property.priority].image}
-            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-          ></Image>
+          {getThumbnail(property)}
           <Typography.Title
             level={4}
             className={`price priority-${property.priority}`}>
