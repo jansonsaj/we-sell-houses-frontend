@@ -17,6 +17,7 @@ import {
   PageHeader,
 } from 'antd';
 import {withRouter} from 'react-router-dom';
+import FileUpload from './FileUpload';
 
 const {Option} = Select;
 
@@ -126,6 +127,7 @@ class UpdateProperty extends React.Component {
       loading: false,
       alert: null,
       property: null,
+      uploadedFiles: [],
     };
     this.getProperty();
   }
@@ -148,10 +150,19 @@ class UpdateProperty extends React.Component {
     const response = await fetch(url, options);
 
     if (response.status === 200) {
-      this.setState({property: await response.json()});
+      const property = await response.json();
+      this.setState({property, uploadedFiles: property.files});
     } else {
       message.error('Cannot load property. Try reloading the page');
     }
+  }
+
+  /**
+   * Update the list of uploaded files
+   * @param {object[]} uploadedFiles Uploaded files
+   */
+  setUploadedFiles = (uploadedFiles) => {
+    this.setState({uploadedFiles});
   }
 
   /**
@@ -189,10 +200,14 @@ class UpdateProperty extends React.Component {
     this.setState({loading: true});
     const propertyId = this.state.property._id;
     const url = `${process.env.REACT_APP_API_URL}/properties/${propertyId}`;
+    const data = {
+      files: this.state.uploadedFiles,
+      ...values,
+    };
 
     const options = {
       method: 'PUT',
-      body: JSON.stringify(values),
+      body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
         'x-access-token': localStorage.getItem('accessToken'),
@@ -272,6 +287,11 @@ class UpdateProperty extends React.Component {
                     type={this.state.alert.type} />
                 </Form.Item>
             }
+            <Form.Item label="Pictures and videos">
+              <FileUpload
+                initialFiles={this.state.property.files}
+                setUploadedFiles={this.setUploadedFiles} />
+            </Form.Item>
             <Form.Item
               name="type"
               label="Type"

@@ -14,6 +14,7 @@ import {
   Divider,
 } from 'antd';
 import {withRouter} from 'react-router-dom';
+import FileUpload from './FileUpload';
 
 const {Option} = Select;
 
@@ -116,6 +117,7 @@ class NewProperty extends React.Component {
   state = {
     loading: false,
     alert: null,
+    uploadedFiles: [],
   };
 
   /**
@@ -124,7 +126,10 @@ class NewProperty extends React.Component {
    */
   onSubmit = async (values) => {
     this.setState({loading: true});
-    const data = {...values};
+    const data = {
+      files: this.state.uploadedFiles,
+      ...values,
+    };
     if (!data.price) {
       data.price = 0;
     }
@@ -179,6 +184,14 @@ class NewProperty extends React.Component {
   }
 
   /**
+   * Update the list of uploaded files
+   * @param {object[]} uploadedFiles Uploaded files
+   */
+  setUploadedFiles = (uploadedFiles) => {
+    this.setState({uploadedFiles});
+  }
+
+  /**
    * Render new property form
    * @return {JSX.Element}
    */
@@ -199,6 +212,9 @@ class NewProperty extends React.Component {
                     type={this.state.alert.type} />
                 </Form.Item>
             }
+            <Form.Item label="Pictures and videos">
+              <FileUpload setUploadedFiles={this.setUploadedFiles}/>
+            </Form.Item>
             <Form.Item
               name="type"
               label="Type"
