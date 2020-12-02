@@ -250,6 +250,44 @@ class Property extends React.Component {
   }
 
   /**
+   * Build a carousel of files
+   * @return {JSX.Element}
+   */
+  fileList = () => {
+    const fileList = [];
+    const {files} = this.state.property;
+
+    const style = {maxHeight: '448px', height: '56vw'};
+
+    if (files && files.length !== 0) {
+      files.forEach((file, i) => {
+        const src = `${process.env.REACT_APP_API_URL}/${file.fileLocation}`;
+        if (file.type.startsWith('image')) {
+          fileList.push(
+              <Image
+                key={i}
+                width='100%'
+                style={style}
+                src={src}
+              />,
+          );
+        } else if (file.type.startsWith('video')) {
+          fileList.push(
+              <video
+                key={i}
+                width="100%"
+                controls
+                style={style}>
+                <source src={src} type={file.type}/>
+              </video>,
+          );
+        }
+      });
+    }
+    return fileList;
+  }
+
+  /**
    * Render property component
    * @return {JSX.Element}
    */
@@ -294,14 +332,7 @@ class Property extends React.Component {
                   <Row justify="center">
                     <Col span={22}>
                       <Carousel>
-                        <Image width='100%'
-                          style={{maxHeight: '448px', height: '56vw'}}
-                          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        />
-                        <Image width='100%'
-                          style={{maxHeight: '448px', height: '56vw'}}
-                          src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                        />
+                        {this.fileList()}
                       </Carousel>
                     </Col>
                   </Row>
