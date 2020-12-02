@@ -1,7 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 
-import {Menu, message} from 'antd';
+import {Menu, message, Badge, notification} from 'antd';
 import {
   HomeOutlined,
   SettingOutlined,
@@ -26,6 +26,7 @@ function Navbar(props) {
   const location = useLocation();
   const history = useHistory();
   const signedIn = !!localStorage.getItem('userId');
+  const [unreadMessages, setUnreadMessages] = useState(null);
 
   /**
    * Change the current theme and remember it
@@ -48,6 +49,45 @@ function Navbar(props) {
     history.push('/signin');
   }
 
+  /**
+   * Get the number of unread messages to display
+   * in a badge
+   */
+  async function getUnreadMessages() {
+    const options = {
+      method: 'GET',
+      headers: {
+        'x-access-token': localStorage.getItem('accessToken'),
+      },
+    };
+
+    const response = await fetch(
+        `${process.env.REACT_APP_API_URL}/messages/summary`,
+        options,
+    );
+
+    if (response.status === 200) {
+      const summary = await response.json();
+      if (unreadMessages !== null &&
+        unreadMessages < summary.unreadMessageCount) {
+        notification.info({
+          message: 'New message',
+          description:
+              'You\'ve just received a new message. Click to go to messages.',
+          onClick: () => {
+            history.push('/messages');
+          },
+        });
+      }
+      setUnreadMessages(summary.unreadMessageCount);
+    }
+  }
+
+
+  if (signedIn) {
+    getUnreadMessages();
+  }
+
   return (
     <Menu
       mode="horizontal"
@@ -65,7 +105,10 @@ function Navbar(props) {
       }
       {signedIn &&
         <Item key="/messages" icon={<MailOutlined />}>
-          <Link to="/messages">Messages</Link>
+          <Link to="/messages">
+            Messages
+            <Badge count={unreadMessages} size="small" offset={[2, -14]} />
+          </Link>
         </Item>
       }
       {signedIn ?
