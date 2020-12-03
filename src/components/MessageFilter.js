@@ -29,6 +29,7 @@ const colLayout = {
 /**
  * Property filter component for displaying filters
  * that can be applied for searching properties
+ * @component
  * @param {object} props Component properties
  * @return {JSX.Element}
  */
@@ -134,8 +135,11 @@ function MessageFilter(props) {
 }
 
 MessageFilter.propTypes = {
+  /** Whether the search button should be loading or not */
   loading: PropTypes.bool.isRequired,
+  /** Contains the pre-selected search parameters */
   searchParams: PropTypes.object.isRequired,
+  /** Called when search parameters have been updated */
   setSearchParams: PropTypes.object.isRequired,
 };
 

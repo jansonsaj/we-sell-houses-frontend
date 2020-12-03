@@ -24,7 +24,9 @@ import Messages from './components/Messages';
 import Message from './components/Message';
 
 /**
- * React entrypoint
+ * React entrypoint / Top level component.
+ * Managed routing and context providers.
+ * @component
  * @return {JSX.Element}
  */
 function App() {

@@ -25,7 +25,10 @@ const colLayout = {
 
 /**
  * Property filter component for displaying filters
- * that can be applied for searching properties
+ * that can be applied for searching properties.
+ * Signed in users will have an extra filter for showing
+ * only properties they have created
+ * @component
  * @param {object} props Component properties
  * @return {JSX.Element}
  */
@@ -175,9 +178,13 @@ function PropertyFilter(props) {
 }
 
 PropertyFilter.propTypes = {
+  /** Whether the search button should be loading or not */
   loading: PropTypes.bool.isRequired,
+  /** Contains the pre-selected search parameters */
   searchParams: PropTypes.object.isRequired,
+  /** Called when search parameters have been updated */
   setSearchParams: PropTypes.object.isRequired,
+  /** Whether the user is signed in or not */
   signedIn: PropTypes.bool.isRequired,
 };
 

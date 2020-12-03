@@ -112,6 +112,7 @@ function priceParser(price) {
 /**
  * New property component, that displays a form
  * for adding new properties
+ * @component
  */
 class NewProperty extends React.Component {
   state = {
@@ -317,6 +318,7 @@ class NewProperty extends React.Component {
 }
 
 NewProperty.propTypes = {
+  /** History from react-router */
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

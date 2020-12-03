@@ -4,6 +4,7 @@ import {useTheme} from '../ThemeContext';
 
 /**
  * Home page
+ * @component
  * @return {JSX.Element}
  */
 function Home() {
