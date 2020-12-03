@@ -17,7 +17,7 @@ const server = setupServer(
     ));
 
 /**
- * Render SignIn component
+ * Render Register component
  * @return {object} Rendered component
  */
 function renderRegister() {
