@@ -3,7 +3,17 @@ import PropTypes from 'prop-types';
 
 import '../styles/Content.less';
 import {UserOutlined, LockOutlined} from '@ant-design/icons';
-import {Layout, Card, Form, Input, Button, Row, Col, Alert} from 'antd';
+import {
+  Layout,
+  Card,
+  Form,
+  Input,
+  Button,
+  Row,
+  Col,
+  Alert,
+  message,
+} from 'antd';
 import {Link, withRouter} from 'react-router-dom';
 
 const rules = {
@@ -81,6 +91,7 @@ class SignIn extends React.Component {
     localStorage.setItem('userId', user.id);
     localStorage.setItem('accessToken', user.accessToken);
     this.props.setSignedIn(true);
+    message.success('You have signed in');
 
     const {history, location} = this.props;
 
