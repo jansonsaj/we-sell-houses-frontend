@@ -219,6 +219,7 @@ class UpdateProperty extends React.Component {
 
     this.setState({loading: false});
     if (response.status === 200) {
+      message.success('Property updated');
       this.goToPreviousPage();
     } else {
       this.displayAlertMessage(response);
@@ -408,8 +409,6 @@ UpdateProperty.propTypes = {
   match: PropTypes.object.isRequired,
   /** History from react-router */
   history: PropTypes.object.isRequired,
-  /** Whether the user is signed in or not */
-  signedIn: PropTypes.bool.isRequired,
 };
 
 export default withRouter(UpdateProperty);
