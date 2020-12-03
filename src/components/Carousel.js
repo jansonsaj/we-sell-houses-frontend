@@ -7,6 +7,7 @@ import {LeftOutlined, RightOutlined} from '@ant-design/icons';
 
 /**
  * Next arrow for carousel
+ * @component
  * @param {object} props Component properties
  * @return {JSX.Element}
  */
@@ -32,6 +33,7 @@ NextArrow.propTypes = {
 
 /**
    * Previous arrow for carousel
+   * @component
    * @param {object} props Component properties
    * @return {JSX.Element}
    */
@@ -56,7 +58,8 @@ PrevArrow.propTypes = {
 
 /**
  * Ant Desgin Carousel wrapper to add next and previous buttons
- * @param {JSX.Element[]} children Children to render in carousel
+ * @component
+ * @param {object} props Props containing children to render in carousel
  * @return {JSX.Element}
  */
 function CarouselWrapper({children}) {
@@ -71,6 +74,7 @@ function CarouselWrapper({children}) {
 }
 
 CarouselWrapper.propTypes = {
+  /** Array of React elements */
   children: PropTypes.array.isRequired,
 };
 

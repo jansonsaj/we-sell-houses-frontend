@@ -31,6 +31,7 @@ const iconProps = {
 /**
  * Message tile component for displaying the most
  * important information about a message in a list
+ * @component
  * @param {object} props Component properties
  * @return {JSX.Element}
  */
@@ -68,7 +69,9 @@ function MessageTile(props) {
 }
 
 MessageTile.propTypes = {
+  /** Message object to display */
   message: PropTypes.object.isRequired,
+  /** History from react-router */
   history: PropTypes.object.isRequired,
 };
 

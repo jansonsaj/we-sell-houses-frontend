@@ -34,6 +34,7 @@ const rules = {
 /**
  * New message component, that displays a form
  * for sending new messages to property owners
+ * @component
  */
 class NewMessage extends React.Component {
   /**
@@ -183,7 +184,9 @@ class NewMessage extends React.Component {
 }
 
 NewMessage.propTypes = {
+  /** History from react-router */
   history: PropTypes.object.isRequired,
+  /** Location from react-router */
   location: PropTypes.object.isRequired,
 };
 

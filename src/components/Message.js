@@ -34,6 +34,7 @@ const colLayout = {
 
 /**
  * Message component
+ * @component
  */
 class Message extends React.Component {
 /**
@@ -349,7 +350,9 @@ class Message extends React.Component {
 }
 
 Message.propTypes = {
+  /** Matched path parameters from react-router */
   match: PropTypes.object.isRequired,
+  /** History from react-router */
   history: PropTypes.object.isRequired,
 };
 

@@ -5,6 +5,7 @@ import {Layout} from 'antd';
 
 /**
  * Footer component
+ * @component
  * @return {JSX.Element}
  */
 function Footer() {

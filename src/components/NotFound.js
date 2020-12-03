@@ -4,6 +4,7 @@ import {Link} from 'react-router-dom';
 
 /**
  * 404 Not Found page
+ * @component
  * @return {JSX.Element}
  */
 function NotFound() {

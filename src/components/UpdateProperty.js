@@ -114,7 +114,8 @@ function priceParser(price) {
 
 /**
  * Update property component, that displays a form
- * for updating existing properties
+ * for updating existing properties and their images
+ * @component
  */
 class UpdateProperty extends React.Component {
   /**
@@ -403,8 +404,11 @@ class UpdateProperty extends React.Component {
 }
 
 UpdateProperty.propTypes = {
+  /** Matched path parameters from react-router */
   match: PropTypes.object.isRequired,
+  /** History from react-router */
   history: PropTypes.object.isRequired,
+  /** Whether the user is signed in or not */
   signedIn: PropTypes.bool.isRequired,
 };
 

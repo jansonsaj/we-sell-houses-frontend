@@ -18,6 +18,7 @@ const ThemeContext = React.createContext({
 
 /**
  * Creates a ThemeContext.Provider wrapper
+ * @component
  * @param {object} children Children to pass Context to
  * @return {JSX.Element}
  */

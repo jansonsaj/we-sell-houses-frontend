@@ -89,6 +89,7 @@ function getThumbnail(property) {
 /**
  * Property tile component for displaying the most
  * important information about a property in a list
+ * @component
  * @param {object} props Component properties
  * @return {JSX.Element}
  */
@@ -136,6 +137,7 @@ function PropertyTile(props) {
 }
 
 PropertyTile.propTypes = {
+  /** Property object to display */
   property: PropTypes.object.isRequired,
 };
 

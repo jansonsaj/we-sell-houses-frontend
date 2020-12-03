@@ -26,7 +26,9 @@ const rules = {
 };
 
 /**
- * Sign in component
+ * Sign in component that signs users in, provided
+ * they have an email and a password of an account
+ * @component
  */
 class SignIn extends React.Component {
   /**
@@ -183,11 +185,14 @@ class SignIn extends React.Component {
 }
 
 SignIn.propTypes = {
+  /** History from react-router */
   history: PropTypes.shape({
     push: PropTypes.func,
     goBack: PropTypes.func,
   }).isRequired,
+  /** Location from react-router */
   location: PropTypes.object,
+  /** Update the value of "signedIn" */
   setSignedIn: PropTypes.func.isRequired,
 };
 

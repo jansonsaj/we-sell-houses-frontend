@@ -86,7 +86,10 @@ function priceFormatter(price) {
 
 
 /**
- * Property component
+ * Property component for displaying all the details
+ * of a specific property and dynamic actions based on
+ * whether the user is the owner of the property
+ * @component
  */
 class Property extends React.Component {
 /**
@@ -449,9 +452,13 @@ class Property extends React.Component {
 }
 
 Property.propTypes = {
+  /** Matched path parameters from react-router */
   match: PropTypes.object.isRequired,
+  /** History from react-router */
   history: PropTypes.object.isRequired,
+  /** Location from react-router */
   location: PropTypes.object.isRequired,
+  /** Whether the user is signed in or not */
   signedIn: PropTypes.bool.isRequired,
 };
 

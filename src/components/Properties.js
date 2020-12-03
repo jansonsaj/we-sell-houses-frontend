@@ -13,6 +13,7 @@ const pageSizeOptions = [
 
 /**
  * Properties component, that lists properties according to the selected filters
+ * @component
  */
 class Properties extends React.Component {
   /**
@@ -197,10 +198,13 @@ class Properties extends React.Component {
 }
 
 Properties.propTypes = {
+  /** History from react-router */
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,
+  /** Location from react-router */
   location: PropTypes.object,
+  /** Whether the user is signed in or not */
   signedIn: PropTypes.bool.isRequired,
 };
 

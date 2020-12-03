@@ -45,7 +45,9 @@ const rules = {
 };
 
 /**
- * Sign in component
+ * Register component that allows property owners and agents
+ * to create an account if they have a sign up code
+ * @component
  */
 class Register extends React.Component {
   state = {
@@ -186,6 +188,7 @@ class Register extends React.Component {
 }
 
 Register.propTypes = {
+  /** History from react-router */
   history: PropTypes.shape({
     push: PropTypes.func,
   }).isRequired,

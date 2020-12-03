@@ -18,6 +18,7 @@ const {SubMenu, Item, ItemGroup} = Menu;
 
 /**
  * Navigation bar
+ * @component
  * @param {object} props Component's properties
  * @return {JSX.Element}
  */
@@ -144,7 +145,9 @@ function Navbar(props) {
 }
 
 Navbar.propTypes = {
+  /** Update the value of "signedIn" */
   setSignedIn: PropTypes.func.isRequired,
+  /** Whether the user is signed in or not */
   signedIn: PropTypes.bool.isRequired,
 };
 

@@ -9,6 +9,7 @@ import {Link} from 'react-router-dom';
 
 /**
  * Header component
+ * @component
  * @param {object} props Component's properties
  * @return {JSX.Element}
  */
@@ -23,9 +24,10 @@ function Header(props) {
 }
 
 Header.propTypes = {
+  /** Update the value of "signedIn" */
   setSignedIn: PropTypes.func.isRequired,
+  /** Whether the user is signed in or not */
   signedIn: PropTypes.bool.isRequired,
 };
-
 
 export default Header;

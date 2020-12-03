@@ -20,6 +20,7 @@ function getBase64(file) {
 
 /**
  * Image upload component
+ * @component
  */
 class FileUpload extends React.Component {
   /**
@@ -165,7 +166,9 @@ class FileUpload extends React.Component {
 }
 
 FileUpload.propTypes = {
+  /** A method to call with currently uploaded files */
   setUploadedFiles: PropTypes.func.isRequired,
+  /** A list of initial files to display */
   initialFiles: PropTypes.array,
 };
 
