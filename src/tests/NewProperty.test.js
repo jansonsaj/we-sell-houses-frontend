@@ -19,7 +19,7 @@ const server = setupServer(
     ));
 
 /**
- * Render SignIn component
+ * Render New Property component
  * @return {object} Rendered component
  */
 function renderNewProperty() {
