@@ -26,7 +26,7 @@ function Navbar(props) {
   const {theme, setTheme} = useTheme();
   const location = useLocation();
   const history = useHistory();
-  const signedIn = !!localStorage.getItem('userId');
+  const {signedIn} = props;
   const [unreadMessages, setUnreadMessages] = useState(null);
 
   /**
