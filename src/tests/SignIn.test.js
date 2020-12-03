@@ -79,10 +79,7 @@ test('when sign in fails, alert is displayed', async () => {
             );
           }),
   );
-  const {container} = renderSignIn((isSignedIn) => {
-    console.log('Hello-------------------');
-    console.log(isSignedIn);
-  });
+  const {container} = renderSignIn();
   userEvent.type(
       screen.getByPlaceholderText(/Email/i),
       'user@email.com',
