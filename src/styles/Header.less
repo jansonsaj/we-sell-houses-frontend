@@ -1,6 +1,7 @@
 .header {
 	display: flex;
 	flex-direction: row;
+	padding-right: 10px;
 
 	&:not(.dark) {
 		border-bottom: 1px solid #f0f0f0;
@@ -21,9 +22,13 @@
 		.collapsed-icon {
 			margin-left: 10px;
 		}
-	}
 
-	.navbar-right {
-		margin-left: auto !important;
+		.ant-menu-overflowed-submenu {
+			margin-left: auto;
+		}
+
+		.navbar-right {
+			margin-left: auto !important;
+		}
 	}
 }
