@@ -12,6 +12,7 @@ import {
   Select,
   InputNumber,
   Divider,
+  message,
 } from 'antd';
 import {withRouter} from 'react-router-dom';
 import FileUpload from './FileUpload';
@@ -163,6 +164,7 @@ class NewProperty extends React.Component {
    * @param {object} property Newly created property
    */
   onPropertyCreated = (property) => {
+    message.success('Property created');
     this.props.history.push(`/properties/${property._id}`);
   }
 
