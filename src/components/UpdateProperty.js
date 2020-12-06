@@ -95,21 +95,21 @@ const features = [
 /**
  * Formats the input price by prepending a £ sign
  * and adding a thousand separator comma
- * @param {number} price Selected price
+ * @param {string} price Selected price
  * @return {string} Formatted price
  */
 function priceFormatter(price) {
-  return `£ ${price ? price : 0}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  return `£ ${priceParser(price) || 0}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
 /**
  * Parses the formatted price to only extract the
  * number value
  * @param {string} price Formatted price
- * @return {number} Parsed price
+ * @return {string} Parsed price
  */
 function priceParser(price) {
-  return parseInt(price.replace(/\£\s?|(,*)/g, ''));
+  return `${price}`.replace(/[^0-9.]/g, '').replace(/^0+/, '');
 }
 
 /**

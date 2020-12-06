@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import PropTypes from 'prop-types';
 
 import {Menu, message, Badge, notification} from 'antd';
@@ -50,11 +50,10 @@ function Navbar(props) {
     history.push('/signin');
   }
 
-  /**
-   * Get the number of unread messages to display
-   * in a badge
-   */
-  async function getUnreadMessages() {
+  useEffect(async () => {
+    if (!signedIn) {
+      return;
+    }
     const options = {
       method: 'GET',
       headers: {
@@ -82,12 +81,7 @@ function Navbar(props) {
       }
       setUnreadMessages(summary.unreadMessageCount);
     }
-  }
-
-
-  if (signedIn) {
-    getUnreadMessages();
-  }
+  }, [location.pathname]);
 
   return (
     <Menu
