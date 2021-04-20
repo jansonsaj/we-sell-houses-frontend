@@ -1,5 +1,6 @@
-# We Sell Houses - jansonsa 304CEM coursework (frontend)
-We Sell Houses is a Single Page Application (SPA) created with React. It allows users (estate agents) to list houses for sale to the general public.
+# We Sell Houses (Frontend)
+
+We Sell Houses is a Single Page Application (SPA) created with React. It allows users (estate agents) to list houses for sale to the general public. Used together with [we-sell-houses-backend](https://github.com/jansonsaj/we-sell-houses-backend)
 
 ## Initial setup
 
@@ -38,11 +39,9 @@ To access the documentation:
 - To configure the base URL of the backend API, modify [.env](.env) file.
 - Since this app was created using [Create React App](https://create-react-app.dev/), all the webpack and other related configuration has been encapsulated. It can be accessed directly by running `yarn eject`, however this would add many files to the source control and would make maintainability much harder. Instead I am using [react-app-rewired](https://github.com/timarney/react-app-rewired) which only exposes a single [config-overrides.js](config-overrides.js) that allows to configure webpack config in a much cleaner way.
 
-## Troubleshooring
-
-This app with all of its node_modules has a size of **~370MB**. This means that it cannot run in the codio environment as it allocated only around 400MB of space per machine. Attempting to run `yarn install` or `npm install` would most likely fail, and even if it did succeed, it would cause the codio environment to become very slow.
-
 ## Component breakdown
+
+The following is a list of components included in the app and their screenshots.
 
 ### Property tile - [src/components/PropertyTile.js](src/components/PropertyTile.js)
 > ![Property Tile](/images/PropertyTile.png)
